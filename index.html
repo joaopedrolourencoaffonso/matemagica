@@ -34,6 +34,10 @@
             } else if (tipoDeQuestao === "subtracaoSimples") {
                 questao = questaoSubtracaoSimples();
             } else if (tipoDeQuestao === "multiplicacaoSimples") {
+                questao = multiplicacaoSimples();
+            } else if (tipoDeQuestao === "divisaoSimples") {
+                questao = divisaoSimples();
+            } else if (tipoDeQuestao === "outro") {
                 console.log(tipoDeQuestao)
             }
             
@@ -78,6 +82,36 @@
             return questao;
         }
 
+        function multiplicacaoSimples() {
+            let primeiroNumero = getRandomInt(6, 10);
+            let segundoNumero = getRandomInt(1, 5);
+            let questao = `${primeiroNumero} x ${segundoNumero} = x`;
+            respostaDaQuestao = primeiroNumero * segundoNumero;
+            let vetorResposta = fazVetorResposta(respostaDaQuestao);
+            
+            // escreve respostas possíveis
+            textoDasRespostas(vetorResposta);
+
+            return questao;
+        }
+
+        
+
+        function divisaoSimples() {
+            respostaDaQuestao = getRandomInt(1, 10);
+            let segundoNumero = getRandomInt(1, 10);
+            let primeiroNumero = respostaDaQuestao * segundoNumero;
+            let questao = `${primeiroNumero} ÷ ${segundoNumero} = x`;
+            let vetorResposta = fazVetorResposta(respostaDaQuestao);
+            
+            // escreve respostas possíveis
+            textoDasRespostas(vetorResposta);
+
+            console.log("Resposta da questão: " + respostaDaQuestao);
+
+            return questao;
+        }
+
         function fazVetorResposta(resposta) {
             let tipo = getRandomInt(1, 4);
             
@@ -100,7 +134,7 @@
             var paragrafo = document.getElementById(letra);
 
             if (paragrafo) {
-                console.log(paragrafo.textContent);
+                console.log(paragrafo.textContent + " - " + respostaDaQuestao);
                 if (parseInt(paragrafo.textContent) === respostaDaQuestao) {
                     alert("Resposta correta!");
                 } else {
