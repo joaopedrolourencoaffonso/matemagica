@@ -8,8 +8,8 @@ Tipos de questões à serem implementados:
 - [X] questões de subtração simples
 - [X] questões de multiplicação simples
 - [X] questões de divisão inteira
-- [ ] questões de soma com múltiplos dígitos
-- [ ] questões de subtração com múltiplos dígitos
+- [X] questões de soma com múltiplos dígitos
+- [X] questões de subtração com múltiplos dígitos
 - [ ] questões de multiplicação com múltiplos dígitos
 - [ ] questões de divisão com múltiplos dígitos
 - [ ] questões de divisão fracionada
