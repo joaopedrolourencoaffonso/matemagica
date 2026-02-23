@@ -5,6 +5,13 @@
 </head>
 <body>
 
+    <select id="opcoes" onchange="selecionaTipoDeQuestao()">
+        <option value="somaSimples">Soma Simples</option>
+        <option value="subtracaoSimples">Subtração Simples</option>
+        <option value="multiplicacaoSimples">Multiplicação Simples</option>
+        <option value="divisaoSimples">Divisão Simples</option>
+    </select>
+
     <p id="texto-questao">2 + 2 = x</p>
 
     <button onclick="checaQuestao('a')"><p id="a">1</p></button><br>
@@ -16,12 +23,19 @@
 
     <script>
         let respostaDaQuestao = 4;
+        let tipoDeQuestao = "somaSimples";
 
         function textoDaQuestao() {
             var paragraph = document.getElementById("texto-questao");
 
             // chama função
-            let questao = questaoSomaSimples();
+            if (tipoDeQuestao === "somaSimples") {
+                questao = questaoSomaSimples();
+            } else if (tipoDeQuestao === "subtracaoSimples") {
+                questao = questaoSubtracaoSimples();
+            } else if (tipoDeQuestao === "multiplicacaoSimples") {
+                console.log(tipoDeQuestao)
+            }
             
             paragraph.textContent = questao;
         }
@@ -43,6 +57,19 @@
             let segundoNumero = getRandomInt(1, 10);
             let questao = `${primeiroNumero} + ${segundoNumero} = x`;
             respostaDaQuestao = primeiroNumero + segundoNumero;
+            let vetorResposta = fazVetorResposta(respostaDaQuestao);
+            
+            // escreve respostas possíveis
+            textoDasRespostas(vetorResposta);
+
+            return questao;
+        }
+
+        function questaoSubtracaoSimples() {
+            let primeiroNumero = getRandomInt(6, 10);
+            let segundoNumero = getRandomInt(1, 5);
+            let questao = `${primeiroNumero} - ${segundoNumero} = x`;
+            respostaDaQuestao = primeiroNumero - segundoNumero;
             let vetorResposta = fazVetorResposta(respostaDaQuestao);
             
             // escreve respostas possíveis
@@ -82,6 +109,14 @@
             } else {
                 console.log("No paragraph found with id: " + letra);
             }
+        }
+
+        //////
+        function selecionaTipoDeQuestao() {
+            var select = document.getElementById("opcoes");
+            tipoDeQuestao = select.value;
+
+            console.log("Tipo de questão selecionada: " + tipoDeQuestao);
         }
     </script>
 
