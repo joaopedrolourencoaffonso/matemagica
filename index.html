@@ -149,7 +149,17 @@
         function fazVetorResposta(resposta) {
             let tipo = getRandomInt(1, 4);
 
-            if (resposta < 200) {
+            if (!Number.isInteger(resposta)) {
+                if (tipo === 1) {
+                    return [resposta,( resposta*0.9).toFixed(2), (resposta*1.1).toFixed(2), (resposta*1.2).toFixed(2)];
+                } else if (tipo === 2) {
+                    return [(resposta*1.2).toFixed(2), resposta, (resposta*0.9).toFixed(2), (resposta*0.8).toFixed(2)];
+                } else if (tipo === 3){
+                    return [(resposta*1.4).toFixed(2), (resposta*0.9).toFixed(2), resposta, (resposta*1.1).toFixed(2)];
+                } else if (tipo === 4) {
+                    return [(resposta*1.1).toFixed(2), (resposta*0.9).toFixed(2), (resposta*0.8).toFixed(2), resposta];
+                }
+            } else if (resposta < 200) {
                 if (tipo === 1) {
                     return [resposta, resposta + 1, resposta -1, resposta + 2];
                 } else if (tipo === 2) {
@@ -181,7 +191,8 @@
 
             if (paragrafo) {
                 console.log(paragrafo.textContent + " - " + respostaDaQuestao);
-                if (parseInt(paragrafo.textContent) === respostaDaQuestao) {
+                console.log(paragrafo.textContent === respostaDaQuestao);
+                if (Number(paragrafo.textContent) === Number(respostaDaQuestao)) {
                     alert("Resposta correta!");
                 } else {
                     alert("Resposta incorreta. Tente novamente!");
