@@ -13,6 +13,7 @@
         <option value="somaMultiplosDigitos">Soma com Múltiplos Dígitos</option>
         <option value="subtracaoMultiplosDigitos">Subtração com Múltiplos Dígitos</option>
         <option value="multiplicacaoMultiplosDigitos">Multiplicação com Múltiplos Dígitos</option>
+        <option value="divisaoComMultiplosDigitos">Divisão com Múltiplos Dígitos</option>
     </select>
 
     <p id="texto-questao">2 + 2 = x</p>
@@ -39,13 +40,15 @@
             } else if (tipoDeQuestao === "multiplicacaoSimples") {
                 questao = multiplicacaoSimples(1,10);
             } else if (tipoDeQuestao === "divisaoSimples") {
-                questao = divisaoSimples();
+                questao = divisaoSimples(1,20);
             } else if (tipoDeQuestao === "somaMultiplosDigitos") {
                 questao = questaoSomaSimples(100,999);
             } else if (tipoDeQuestao === "subtracaoMultiplosDigitos") {
                 questao = questaoSubtracaoSimples(500,999,100,499);
             } else if (tipoDeQuestao === "multiplicacaoMultiplosDigitos") {
                 questao = multiplicacaoSimples(1,99);
+            } else if (tipoDeQuestao === "divisaoComMultiplosDigitos") {
+                questao = divisaoSimples(10,99);
             } else if (tipoDeQuestao === "outro") {
                 console.log(tipoDeQuestao)
             }
@@ -106,9 +109,9 @@
 
         
 
-        function divisaoSimples() {
-            respostaDaQuestao = getRandomInt(1, 10);
-            let segundoNumero = getRandomInt(1, 10);
+        function divisaoSimples(min, max) {
+            respostaDaQuestao = getRandomInt(min, max);
+            let segundoNumero = getRandomInt(min, max);
             let primeiroNumero = respostaDaQuestao * segundoNumero;
             let questao = `${primeiroNumero} ÷ ${segundoNumero} = x`;
             let vetorResposta = fazVetorResposta(respostaDaQuestao);
