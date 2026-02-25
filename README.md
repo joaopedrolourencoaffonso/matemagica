@@ -11,7 +11,7 @@ Tipos de questões à serem implementados:
 - [X] questões de soma com múltiplos dígitos
 - [X] questões de subtração com múltiplos dígitos
 - [X] questões de multiplicação com múltiplos dígitos
-- [ ] questões de divisão com múltiplos dígitos
+- [X] questões de divisão com múltiplos dígitos
 - [ ] questões de divisão fracionada
 - [ ] expressões
 - [ ] equações simples

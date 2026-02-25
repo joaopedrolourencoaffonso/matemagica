@@ -14,6 +14,7 @@
         <option value="subtracaoMultiplosDigitos">Subtração com Múltiplos Dígitos</option>
         <option value="multiplicacaoMultiplosDigitos">Multiplicação com Múltiplos Dígitos</option>
         <option value="divisaoComMultiplosDigitos">Divisão com Múltiplos Dígitos</option>
+        <option value="divisaoRacional">Divisão com resultado fracionado</option>
     </select>
 
     <p id="texto-questao">2 + 2 = x</p>
@@ -49,6 +50,8 @@
                 questao = multiplicacaoSimples(1,99);
             } else if (tipoDeQuestao === "divisaoComMultiplosDigitos") {
                 questao = divisaoSimples(10,99);
+            } else if (tipoDeQuestao === "divisaoRacional") {
+                questao = divisaoRacional(10, 99);
             } else if (tipoDeQuestao === "outro") {
                 console.log(tipoDeQuestao)
             }
@@ -107,12 +110,31 @@
             return questao;
         }
 
-        
-
         function divisaoSimples(min, max) {
             respostaDaQuestao = getRandomInt(min, max);
             let segundoNumero = getRandomInt(min, max);
             let primeiroNumero = respostaDaQuestao * segundoNumero;
+            let questao = `${primeiroNumero} ÷ ${segundoNumero} = x`;
+            let vetorResposta = fazVetorResposta(respostaDaQuestao);
+            
+            // escreve respostas possíveis
+            textoDasRespostas(vetorResposta);
+
+            console.log("Resposta da questão: " + respostaDaQuestao);
+
+            return questao;
+        }
+
+        function divisaoRacional(min, max) {
+            while (true) {
+                primeiroNumero = getRandomInt(min, max);
+                segundoNumero = getRandomInt(min, max);
+                if (primeiroNumero % segundoNumero > 0) {
+                    break;
+                }
+            }
+            respostaDaQuestao = primeiroNumero / segundoNumero;
+            respostaDaQuestao = respostaDaQuestao.toFixed(2);
             let questao = `${primeiroNumero} ÷ ${segundoNumero} = x`;
             let vetorResposta = fazVetorResposta(respostaDaQuestao);
             
