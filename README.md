@@ -13,9 +13,9 @@ Tipos de questões à serem implementados:
 - [X] questões de multiplicação com múltiplos dígitos
 - [X] questões de divisão com múltiplos dígitos
 - [X] questões de divisão fracionada
-- [ ] expressões
-- [ ] equações simples
-- [ ] sistemas de equações com duas variáveis
+- [X] questões de expressões
+- [X] questões de equações simples
+- [ ] questões de sistemas de equações com duas variáveis
 
 Melhorias na UI:
 

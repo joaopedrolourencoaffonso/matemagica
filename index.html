@@ -16,6 +16,7 @@
         <option value="divisaoComMultiplosDigitos">Divisão com Múltiplos Dígitos</option>
         <option value="divisaoRacional">Divisão com resultado fracionado</option>
         <option value="expressoes">Expressões</option>
+        <option value="equacoesSimples">Equações Simples</option>
     </select>
 
     <p id="texto-questao">2 + 2 = x</p>
@@ -55,6 +56,8 @@
                 questao = divisaoRacional(10, 99);
             } else if (tipoDeQuestao === "expressoes") {
                 questao = expressoes();
+            } else if (tipoDeQuestao === "equacoesSimples") {
+                questao = equacoesSimples();
             } else if (tipoDeQuestao === "outro") {
                 console.log(tipoDeQuestao)
             }
@@ -222,63 +225,68 @@
             return questao;
         }
 
-        function oldexpressoes() {
-            let expressoes = ["a + b - c + d", 
-            "a - b + c + d", 
-            "(a x b) + c + d", 
-            "a + (b x c) x d", 
-            "(a x b) - (c x d)", 
-            "(a + b) ÷ (20 + c - d)", 
-            "(a x b) ÷ (c x d)",
-            "(a ÷ b) - c - d",
-            "[(a x b) ÷ c] + d",
-            "{[(2 x a) + (3 x b)] ÷ c} x d",
-            "{(2 x a) + [(3 x b) ÷ c]} x d",
-            "{[(2 x a) + (3 x b)] ÷ (c x d)}"
+        function equacoesSimples() {
+            const tipos = [
+                {
+                    texto: "ax + b = c + d",
+                    calc: (a,b,c,d) => (c + d - b) / a
+                },
+                {
+                    texto: "ax + bx - c = d",
+                    calc: (a,b,c,d) => (d + c) / (a + b)
+                },
+                {
+                    texto: "ax + bx - cx = d",
+                    calc: (a,b,c,d) => d / (a + b - c)
+                },
+                {
+                    texto: "ax + b - c = dx",
+                    calc: (a,b,c,d) => (c - b) / (a - d)
+                },
+                {
+                    texto: "ax + b - c = d",
+                    calc: (a,b,c,d) => (d + c - b) / a
+                },
+                {
+                    texto: "a + b - c = dx",
+                    calc: (a,b,c,d) => (c - b - a) / d
+                },
+                {
+                    texto: "a + bx - c = dx + 2",
+                    calc: (a,b,c,d) => (a - c - 2) / (d - b)
+                },
+                {
+                    texto: "(a + b)x - c = d + 2",
+                    calc: (a,b,c,d) => (d + 2 + c) / (a + b)
+                },
+                {
+                    texto: "a + bx - c = 2*d + 2",
+                    calc: (a,b,c,d) => (2*d + 2 + c - a) / b
+                },
+                {
+                    texto: "a + bx - cx = d + 10",
+                    calc: (a,b,c,d) => (d + 10 + c - a) / (b - c)
+                }
             ];
-            let tipo = getRandomInt(0,11);
+
+            const tipo = getRandomInt(0, tipos.length - 1);
+
             let a = getRandomInt(1,20);
             let b = getRandomInt(1,20);
             let c = getRandomInt(1,20);
             let d = getRandomInt(1,20);
 
-            if (tipo === 0) {
-                respostaDaQuestao = a + b - c + d;
-            } else if (tipo === 1) {
-                respostaDaQuestao = a - b + c + d;
-            } else if (tipo === 2) {
-                respostaDaQuestao = (a * b) + c + d;
-            } else if (tipo === 3) {
-                respostaDaQuestao = a + (b * c) * d;
-            } else if (tipo === 4) {
-                respostaDaQuestao = (a * b) - (c * d);
-            } else if (tipo === 5) {
-                respostaDaQuestao = (a + b) / (20 + c - d);
-            } else if (tipo === 6) {
-                respostaDaQuestao = (a * b) / (c * d);
-            } else if (tipo === 7) {
-                respostaDaQuestao = (a / b) - c - d;
-            } else if (tipo === 8) {
-                respostaDaQuestao = ((a * b) / c) + d;
-            } else if (tipo === 9) {
-                respostaDaQuestao = ((2 * a) + (3 * b)) / c * d;
-            } else if (tipo === 10) {
-                respostaDaQuestao = ((2 * a) + (3 * b)) / c * d;
-            } else {
-                respostaDaQuestao = ((2 * a) + (3 * b)) / (c * d);
-            }
-
-            respostaDaQuestao = respostaDaQuestao.toFixed(2);
-
-            let questao = expressoes[tipo].replace("a", a).replace("b", b).replace("c", c).replace("d", d).replace("x", "x");
-
+            respostaDaQuestao = tipos[tipo].calc(a,b,c,d);
+            respostaDaQuestao = Number(respostaDaQuestao.toFixed(2));
             let vetorResposta = fazVetorResposta(respostaDaQuestao);
-            
+
             // escreve respostas possíveis
             textoDasRespostas(vetorResposta);
-            
-            console.log("Resposta da questão: " + respostaDaQuestao);
-            
+
+            let questao = tipos[tipo].texto.replaceAll("a", a).replaceAll("b", b).replaceAll("c", c).replaceAll("d", d);
+
+            console.log("Resposta da questão:", respostaDaQuestao);
+
             return questao;
         }
 
