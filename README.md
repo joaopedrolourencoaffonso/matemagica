@@ -16,7 +16,7 @@ Tipos de questões à serem implementados:
 - [X] questões de expressões
 - [X] questões de equações simples
 - [X] questões de sistemas de equações com duas variáveis
-- [ ] questões de simplificar frações
+- [X] questões de simplificar frações
 - [ ] questões de expressões com frações
 - [ ] questões de potenciação
 - [ ] questões de raiz

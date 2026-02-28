@@ -2,6 +2,29 @@
 <html>
 <head>
     <title>Matemágica</title>
+
+    <style>
+        .fracao {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 20px;
+        }
+
+        .topo {
+            line-height: 1.2;
+        }
+
+        .linha {
+            width: 100%;
+            border-top: 2px solid black;
+            margin: 2px 0;
+        }
+
+        .base {
+            line-height: 1.2;
+        }
+    </style>
 </head>
 <body>
 
@@ -16,6 +39,7 @@
         <option value="divisaoComMultiplosDigitos">Divisão com Múltiplos Dígitos</option>
         <option value="divisaoRacional">Divisão com resultado fracionado</option>
         <option value="expressoes">Expressões</option>
+        <option value="simplificarFracao">Simplificar frações</option>
         <option value="equacoesSimples">Equações Simples</option>
         <option value="sistemasDeEquacoes">Sistemas de Equações</option>
     </select>
@@ -57,6 +81,8 @@
                 questao = divisaoRacional(10, 99);
             } else if (tipoDeQuestao === "expressoes") {
                 questao = expressoes();
+            } else if (tipoDeQuestao === "simplificarFracao") {
+                questao = simplificarFracao();
             } else if (tipoDeQuestao === "equacoesSimples") {
                 questao = equacoesSimples();
             } else if (tipoDeQuestao === "sistemasDeEquacoes") {
@@ -319,6 +345,30 @@
             return questao;
         }
 
+        function simplificarFracao() {
+            let numerador = getRandomInt(1,100);
+            let denominador = getRandomInt(1,100);
+            respostaDaQuestao = `${numerador} / ${denominador}`;
+
+            let fator1 = getRandomInt(1,4);
+            let fator2 = getRandomInt(2,5);
+            denominador = denominador * fator1 * fator2;
+            numerador = numerador * fator1 * fator2;
+            let questao = `Simplifique a fração: <br> 
+            <span class="fracao">
+                <span class="topo">${numerador}</span>
+                <span class="linha"></span>
+                <span class="base">${denominador}</span>
+            </span>`;
+            
+            let vetorResposta = fazVetorRespostaFracao(numerador, denominador, fator1 * fator2);
+            textoDasRespostas(vetorResposta);
+
+            console.log("Resposta da questão:", respostaDaQuestao);
+
+            return questao;
+        }
+
         function fazVetorResposta(resposta) {
             let tipo = getRandomInt(1, 4);
 
@@ -355,6 +405,23 @@
             }
         }
 
+        function fazVetorRespostaFracao(numerador, denominador, fator) {
+            let tipo = getRandomInt(1, 4);
+            console.log("Fator de simplificação:", numerador, denominador, fator);
+            numerador = numerador / fator;
+            denominador = denominador / fator;
+
+            if (tipo === 1) {
+                return [`${numerador} / ${denominador}`, `${numerador + 1} / ${denominador + 1}`, `${numerador - 1} / ${denominador - 1}`, `${numerador + 2} / ${denominador + 2}`];
+            } else if (tipo === 2) {
+                return [ `${numerador + 1} / ${denominador + 1}`, `${numerador} / ${denominador}`, `${numerador - 1} / ${denominador - 1}`, `${numerador + 2} / ${denominador + 2}`];
+            } else if (tipo === 3){
+                return [`${numerador - 1} / ${denominador - 1}`, `${numerador + 2} / ${denominador + 2}`, `${numerador} / ${denominador}`, `${numerador - 2} / ${denominador - 2}`];
+            } else if (tipo === 4) {
+                return [`${numerador + 2} / ${denominador + 2}`, `${numerador + 1} / ${denominador - 1}`, `${numerador - 2} / ${denominador - 1}`, `${numerador} / ${denominador}`];
+            }
+        }
+
         function getRandomInt(min, max) {
             return Math.floor(Math.random() * (max - min + 1)) + min;
         }
@@ -365,7 +432,9 @@
             if (paragrafo) {
                 console.log(paragrafo.textContent + " - " + respostaDaQuestao);
                 console.log(paragrafo.textContent === respostaDaQuestao);
-                if (Number(paragrafo.textContent) === Number(respostaDaQuestao)) {
+                if (paragrafo.textContent === respostaDaQuestao) {
+                    alert("Resposta correta!");
+                } else if (Number(paragrafo.textContent) === Number(respostaDaQuestao)) {
                     alert("Resposta correta!");
                 } else {
                     alert("Resposta incorreta. Tente novamente!");
