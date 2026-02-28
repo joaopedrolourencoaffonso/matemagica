@@ -15,7 +15,22 @@ Tipos de questões à serem implementados:
 - [X] questões de divisão fracionada
 - [X] questões de expressões
 - [X] questões de equações simples
-- [ ] questões de sistemas de equações com duas variáveis
+- [X] questões de sistemas de equações com duas variáveis
+- [ ] questões de simplificar frações
+- [ ] questões de expressões com frações
+- [ ] questões de potenciação
+- [ ] questões de raiz
+- [ ] questões de expressões com raiz e exponenciação
+- [ ] questões de equação quadrática
+- [ ] questões de Razão, proporção e porcentagem
+- [ ] questões de produtos notáveis
+- [ ] questões de Fatoração simples
+- [ ] questões de Identidades algébricas
+- [ ] questões de função
+- [ ] questões de limite
+- [ ] questão de derivada simples
+- [ ] questão de máximo e mínimo simples
+
 
 Melhorias na UI:
 

@@ -17,6 +17,7 @@
         <option value="divisaoRacional">Divisão com resultado fracionado</option>
         <option value="expressoes">Expressões</option>
         <option value="equacoesSimples">Equações Simples</option>
+        <option value="sistemasDeEquacoes">Sistemas de Equações</option>
     </select>
 
     <p id="texto-questao">2 + 2 = x</p>
@@ -58,11 +59,13 @@
                 questao = expressoes();
             } else if (tipoDeQuestao === "equacoesSimples") {
                 questao = equacoesSimples();
+            } else if (tipoDeQuestao === "sistemasDeEquacoes") {
+                questao = sistemasDeEquacoes();
             } else if (tipoDeQuestao === "outro") {
                 console.log(tipoDeQuestao)
             }
             
-            paragraph.textContent = questao;
+            paragraph.innerHTML = questao;
         }
 
         function textoDasRespostas(vetorResposta) {
@@ -252,8 +255,8 @@
                     calc: (a,b,c,d) => (c - b - a) / d
                 },
                 {
-                    texto: "a + bx - c = dx + 2",
-                    calc: (a,b,c,d) => (a - c - 2) / (d - b)
+                    texto: "a + (b + 32)x - c = dx + 2",
+                    calc: (a,b,c,d) => (a - c - 2) / (d - b - 32)
                 },
                 {
                     texto: "(a + b)x - c = d + 2",
@@ -286,6 +289,32 @@
             let questao = tipos[tipo].texto.replaceAll("a", a).replaceAll("b", b).replaceAll("c", c).replaceAll("d", d);
 
             console.log("Resposta da questão:", respostaDaQuestao);
+
+            return questao;
+        }
+
+        function sistemasDeEquacoes() {
+            questao = "Encontre o valor de x em:<br>a1x + b1y = c1<br>a2x + b2y = c2";           
+            let a1 = getRandomInt(1,10);
+            let b1 = getRandomInt(1,10);
+            let c1 = getRandomInt(1,10);
+            let a2 = getRandomInt(1,10);
+            let b2 = getRandomInt(1,10);
+            let c2 = getRandomInt(1,10);
+
+            let y = (b2 * c1 - b1 * c2) / (a1 * b2 - a2 * b1);
+            y = y.toFixed(2);
+            let x = (c1 - b1 * y) / a1;
+            x = x.toFixed(2);
+
+            respostaDaQuestao = x;
+
+            questao = questao.replaceAll("a1", a1).replaceAll("b1", b1).replaceAll("c1", c1).replaceAll("a2", a2).replaceAll("b2", b2).replaceAll("c2", c2);
+
+            let vetorResposta = fazVetorResposta(respostaDaQuestao);
+            textoDasRespostas(vetorResposta);
+
+             console.log("Resposta da questão:", x, y);
 
             return questao;
         }
