@@ -46,6 +46,7 @@
         <option value="potenciacao">Potenciação</option>
         <option value="raizQuadrada">Raiz Quadrada</option>
         <option value="expressoesRaizPotenciacao">Expressões com raiz e potenciação</option>
+        <option value="equacaoQuadraticaSimples">Equação Quadrática Simples</option>
     </select>
 
     <p id="texto-questao">2 + 2 = x</p>
@@ -99,6 +100,8 @@
                 questao = raizQuadrada();
             } else if (tipoDeQuestao === "expressoesRaizPotenciacao") {
                 questao = expressoesRaizPotenciacao();
+            } else if (tipoDeQuestao === "equacaoQuadraticaSimples") {
+                questao = equacaoQuadraticaSimples();
             } else if (tipoDeQuestao === "outro") {
                 console.log(tipoDeQuestao)
             }
@@ -112,10 +115,10 @@
             var paragrafoC = document.getElementById("c");
             var paragrafoD = document.getElementById("d");
 
-            paragrafoA.textContent = vetorResposta[0];
-            paragrafoB.textContent = vetorResposta[1];
-            paragrafoC.textContent = vetorResposta[2];
-            paragrafoD.textContent = vetorResposta[3];
+            paragrafoA.innerHTML = vetorResposta[0];
+            paragrafoB.innerHTML = vetorResposta[1];
+            paragrafoC.innerHTML = vetorResposta[2];
+            paragrafoD.innerHTML = vetorResposta[3];
         }
 
         function questaoSomaSimples(min, max) {
@@ -523,6 +526,42 @@
             let questao = tipos[tipo].texto.replaceAll("a", a).replaceAll("b", b).replaceAll("c", c).replaceAll("d", d);
 
             console.log("Resposta da questão:", respostaDaQuestao);
+
+            return questao;
+        }
+
+        function equacaoQuadraticaSimples() {
+            let a = getRandomInt(1,10);
+            let b = getRandomInt(1,10);
+            let c = getRandomInt(1,10);
+            let x = getRandomInt(-10,10);
+            let tipo = getRandomInt(1, 4);
+            let d = 0;
+            let questao = "";
+
+            if (tipo === 1) {
+                d = a * Math.pow(x, 2) + b * x + c;
+                questao = `${a}x<sup>2</sup> + ${b}x + ${c} = ${d}`;
+            } else if (tipo === 2) {
+                d = a * Math.pow(x, 2) - b * x + c;
+                questao = `${a}x<sup>2</sup> - ${b}x + ${c} = ${d}`;
+            } else if (tipo === 3) {
+                d = a * Math.pow(x, 2) - b * x - c;
+                questao = `${a}x<sup>2</sup> - ${b}x - ${c} = ${d}`;
+            } else if (tipo === 4) {
+                d = -a * Math.pow(x, 2) + b * x + c;
+                questao = `-${a}x<sup>2</sup> + ${b}x + ${c} = ${d}`;
+            }
+
+            respostaDaQuestao = x;
+            vetorResposta = fazVetorResposta(respostaDaQuestao);
+            textoDasRespostas(vetorResposta);
+
+            console.log("Resposta da questão:", respostaDaQuestao);
+
+            questao = questao.replaceAll("a", a).replaceAll("b", b).replaceAll("c", c).replaceAll("d", d);
+
+            questao = `Encontre o valor de x em:<br>${questao}`;
 
             return questao;
         }
