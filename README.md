@@ -19,7 +19,7 @@ Tipos de questões à serem implementados:
 - [X] questões de simplificar frações
 - [X] questões de expressões com frações
 - [X] questões de potenciação
-- [ ] questões de raiz
+- [X] questões de raiz quadrada
 - [ ] questões de expressões com raiz e exponenciação
 - [ ] questões de equação quadrática
 - [ ] questões de Razão, proporção e porcentagem

@@ -45,6 +45,7 @@
         <option value="sistemasDeEquacoes">Sistemas de Equações</option>
         <option value="potenciacao">Potenciação</option>
         <option value="raizQuadrada">Raiz Quadrada</option>
+        <option value="expressoesRaizPotenciacao">Expressões com raiz e potenciação</option>
     </select>
 
     <p id="texto-questao">2 + 2 = x</p>
@@ -96,6 +97,8 @@
                 questao = potenciacao();
             } else if (tipoDeQuestao === "raizQuadrada") {
                 questao = raizQuadrada();
+            } else if (tipoDeQuestao === "expressoesRaizPotenciacao") {
+                questao = expressoesRaizPotenciacao();
             } else if (tipoDeQuestao === "outro") {
                 console.log(tipoDeQuestao)
             }
@@ -440,6 +443,87 @@
             textoDasRespostas(vetorResposta);
 
             let questao = `√${numero}`;
+            return questao;
+        }
+
+        function expressoesRaizPotenciacao() {
+            const tipos = [
+                {
+                    texto: "√a + √b - c + d",
+                    a: Math.pow(getRandomInt(1,10), 2),
+                    b: Math.pow(getRandomInt(1,10), 2),
+                    c: getRandomInt(1,20),
+                    d: getRandomInt(1,20),
+                    calc: (a,b,c,d) => Math.sqrt(a) + Math.sqrt(b) - c + d
+                },
+                {
+                    texto: "b x √(a) - (c x d)<sup>2</sup>",
+                    a: Math.pow(getRandomInt(1,10), 2),
+                    b: getRandomInt(1,10),
+                    c: getRandomInt(1,20),
+                    d: getRandomInt(1,20),
+                    calc: (a,b,c,d) => b * Math.sqrt(a) - Math.pow((c * d), 2)
+                },
+                {
+                    texto: "a + b - √c + d<sup>2</sup>",
+                    a: getRandomInt(1,10),
+                    b: getRandomInt(1,10),
+                    c: Math.pow(getRandomInt(1,20), 2),
+                    d: getRandomInt(1,20),
+                    calc: (a,b,c,d) => a + b - Math.sqrt(c) + Math.pow(d, 2)
+                },
+                {
+                    texto: "a + b + c - √d",
+                    a: getRandomInt(1,10),
+                    b: getRandomInt(1,10),
+                    c: getRandomInt(1,20),
+                    d: Math.pow(getRandomInt(1,20), 2),
+                    calc: (a,b,c,d) => a + b + c - Math.sqrt(d)
+                },
+                {
+                    texto: "5 x a ÷ (b<sup>2</sup> + c + d)",
+                    a: getRandomInt(1,10),
+                    b: getRandomInt(1,10),
+                    c: getRandomInt(1,10),
+                    d: getRandomInt(1,10),
+                    calc: (a,b,c,d) => (5*a) / (Math.pow(b, 2) + c + d)
+                },
+                {
+                    texto: "a<sup>2</sup> + b<sup>2</sup> - 2 x c + √d",
+                    a: getRandomInt(1,10),
+                    b: getRandomInt(1,10),
+                    c: getRandomInt(1,20),
+                    d: Math.pow(getRandomInt(1,20), 2),
+                    calc: (a,b,c,d) => a*a + b*b - 2*c + Math.sqrt(d)
+                },
+                {
+                    texto: "√a x √(b + c + d)",
+                    a: getRandomInt(1,10),
+                    b: getRandomInt(1,10),
+                    c: getRandomInt(1,10),
+                    d: getRandomInt(1,10),
+                    calc: (a,b,c,d) => Math.sqrt(a) * Math.sqrt(b + c + d)
+                }
+            ];
+
+            const tipo = getRandomInt(0, tipos.length - 1);
+
+            let a = tipos[tipo].a;
+            let b = tipos[tipo].b;
+            let c = tipos[tipo].c;
+            let d = tipos[tipo].d;
+            respostaDaQuestao = tipos[tipo].calc(a,b,c,d);
+
+            respostaDaQuestao = Number(respostaDaQuestao.toFixed(2));
+            let vetorResposta = fazVetorResposta(respostaDaQuestao);
+
+            // escreve respostas possíveis
+            textoDasRespostas(vetorResposta);
+
+            let questao = tipos[tipo].texto.replaceAll("a", a).replaceAll("b", b).replaceAll("c", c).replaceAll("d", d);
+
+            console.log("Resposta da questão:", respostaDaQuestao);
+
             return questao;
         }
 
