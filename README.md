@@ -21,7 +21,7 @@ Tipos de questões à serem implementados:
 - [X] potenciação
 - [X] raiz quadrada
 - [X] expressões com raiz e exponenciação
-- [ ] equação quadrática Simples
+- [X] equação quadrática Simples
 - [ ] equação quadrática Complexa
 - [ ] Razão, proporção e porcentagem
 - [ ] produtos notáveis
