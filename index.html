@@ -373,10 +373,10 @@
         }
 
         function expressaoDeFracao() {
-            let numerador1 = getRandomInt(1,100);
-            let denominador1 = getRandomInt(1,100);
-            let numerador2 = getRandomInt(1,100);
-            let denominador2 = getRandomInt(1,100);
+            let numerador1 = getRandomInt(1,15);
+            let denominador1 = getRandomInt(1,15);
+            let numerador2 = getRandomInt(1,15);
+            let denominador2 = getRandomInt(1,15);
             let fator1 = numerador1 * denominador2 + numerador2 * denominador1;
             let fator2 = denominador1 * denominador2;
 
@@ -388,15 +388,11 @@
             if (fator1 % fator2 === 0) {
                 console.log("A resposta é um número inteiro.");
                 respostaDaQuestao = fator1 / fator2;
-                console.log("Resposta da questão:", respostaDaQuestao);
                 vetorResposta = fazVetorResposta(respostaDaQuestao);
-                console.log("Vetor resposta:", vetorResposta);
             } else {
-                console.log("A resposta é uma fração.");
+                [fator1, fator2] = simplificadorDeFracao(fator1, fator2);
                 respostaDaQuestao = `${fator1} / ${fator2}`;
-                console.log("Resposta da questão:", respostaDaQuestao);
                 vetorResposta = fazVetorRespostaFracao(fator1, fator2, 1);
-                console.log("Vetor resposta:", vetorResposta);
             }
             console.log("Banana");
             textoDasRespostas(vetorResposta);
@@ -500,6 +496,23 @@
             tipoDeQuestao = select.value;
 
             console.log("Tipo de questão selecionada: " + tipoDeQuestao);
+        }
+
+        function simplificadorDeFracao(numerador, denominador) {
+            let num = 2;
+            while (true) {
+                if (numerador % num === 0 && denominador % num === 0) {
+                    numerador = numerador / num;
+                    denominador = denominador / num;
+                } else {
+                    num++;
+                }
+
+                if (num > Math.min(numerador, denominador)) {
+                    break;
+                }
+            }
+            return [numerador, denominador];
         }
     </script>
 
