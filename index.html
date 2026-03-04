@@ -43,6 +43,7 @@
         <option value="expressaoDeFracao">Expressões de frações</option>
         <option value="equacoesSimples">Equações Simples</option>
         <option value="sistemasDeEquacoes">Sistemas de Equações</option>
+        <option value="potenciacao">Potenciação</option>
     </select>
 
     <p id="texto-questao">2 + 2 = x</p>
@@ -90,6 +91,8 @@
                 questao = equacoesSimples();
             } else if (tipoDeQuestao === "sistemasDeEquacoes") {
                 questao = sistemasDeEquacoes();
+            } else if (tipoDeQuestao === "potenciacao") {
+                questao = potenciacao();
             } else if (tipoDeQuestao === "outro") {
                 console.log(tipoDeQuestao)
             }
@@ -412,6 +415,17 @@
             
             console.log("Resposta da questão:", respostaDaQuestao);
 
+            return questao;
+        }
+
+        function potenciacao() {
+            let a = getRandomInt(1,10);
+            let b = getRandomInt(1,5);
+            respostaDaQuestao = Math.pow(a, b);
+            vetorResposta = fazVetorResposta(respostaDaQuestao);
+            textoDasRespostas(vetorResposta);
+
+            let questao = `${a}<sup>${b}</sup>`;
             return questao;
         }
 
