@@ -44,6 +44,7 @@
         <option value="equacoesSimples">Equações Simples</option>
         <option value="sistemasDeEquacoes">Sistemas de Equações</option>
         <option value="potenciacao">Potenciação</option>
+        <option value="raizQuadrada">Raiz Quadrada</option>
     </select>
 
     <p id="texto-questao">2 + 2 = x</p>
@@ -93,6 +94,8 @@
                 questao = sistemasDeEquacoes();
             } else if (tipoDeQuestao === "potenciacao") {
                 questao = potenciacao();
+            } else if (tipoDeQuestao === "raizQuadrada") {
+                questao = raizQuadrada();
             } else if (tipoDeQuestao === "outro") {
                 console.log(tipoDeQuestao)
             }
@@ -426,6 +429,17 @@
             textoDasRespostas(vetorResposta);
 
             let questao = `${a}<sup>${b}</sup>`;
+            return questao;
+        }
+
+        function raizQuadrada() {
+            respostaDaQuestao = getRandomInt(1,50);
+            let numero = respostaDaQuestao * respostaDaQuestao;
+            
+            vetorResposta = fazVetorResposta(respostaDaQuestao);
+            textoDasRespostas(vetorResposta);
+
+            let questao = `√${numero}`;
             return questao;
         }
 
