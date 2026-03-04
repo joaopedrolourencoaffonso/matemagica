@@ -40,6 +40,7 @@
         <option value="divisaoRacional">Divisão com resultado fracionado</option>
         <option value="expressoes">Expressões</option>
         <option value="simplificarFracao">Simplificar frações</option>
+        <option value="expressaoDeFracao">Expressões de frações</option>
         <option value="equacoesSimples">Equações Simples</option>
         <option value="sistemasDeEquacoes">Sistemas de Equações</option>
     </select>
@@ -81,6 +82,8 @@
                 questao = divisaoRacional(10, 99);
             } else if (tipoDeQuestao === "expressoes") {
                 questao = expressoes();
+            } else if (tipoDeQuestao === "expressaoDeFracao") {
+                questao = expressaoDeFracao();
             } else if (tipoDeQuestao === "simplificarFracao") {
                 questao = simplificarFracao();
             } else if (tipoDeQuestao === "equacoesSimples") {
@@ -364,6 +367,53 @@
             let vetorResposta = fazVetorRespostaFracao(numerador, denominador, fator1 * fator2);
             textoDasRespostas(vetorResposta);
 
+            console.log("Resposta da questão:", respostaDaQuestao);
+
+            return questao;
+        }
+
+        function expressaoDeFracao() {
+            let numerador1 = getRandomInt(1,100);
+            let denominador1 = getRandomInt(1,100);
+            let numerador2 = getRandomInt(1,100);
+            let denominador2 = getRandomInt(1,100);
+            let fator1 = numerador1 * denominador2 + numerador2 * denominador1;
+            let fator2 = denominador1 * denominador2;
+
+            console.log("Fatores:", fator1 % fator2);
+
+            // declare vetorResposta in outer scope so it's available after the if/else
+            let vetorResposta;
+
+            if (fator1 % fator2 === 0) {
+                console.log("A resposta é um número inteiro.");
+                respostaDaQuestao = fator1 / fator2;
+                console.log("Resposta da questão:", respostaDaQuestao);
+                vetorResposta = fazVetorResposta(respostaDaQuestao);
+                console.log("Vetor resposta:", vetorResposta);
+            } else {
+                console.log("A resposta é uma fração.");
+                respostaDaQuestao = `${fator1} / ${fator2}`;
+                console.log("Resposta da questão:", respostaDaQuestao);
+                vetorResposta = fazVetorRespostaFracao(fator1, fator2, 1);
+                console.log("Vetor resposta:", vetorResposta);
+            }
+            console.log("Banana");
+            textoDasRespostas(vetorResposta);
+
+            let questao = `Simplifique a fração: <br> 
+            <span class="fracao">
+                <span class="topo">${numerador1}</span>
+                <span class="linha"></span>
+                <span class="base">${denominador1}</span>
+            </span>
+            +
+            <span class="fracao">
+                <span class="topo">${numerador2}</span>
+                <span class="linha"></span>
+                <span class="base">${denominador2}</span>
+            </span>`;
+            
             console.log("Resposta da questão:", respostaDaQuestao);
 
             return questao;
