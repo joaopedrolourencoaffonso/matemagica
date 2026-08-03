@@ -86,6 +86,28 @@
             justify-content: center;
             align-items: center;
         }
+
+        .titulo-da-questao {
+            align-items: center;
+            padding-left: 5%;
+            font-size: 20px;
+        }
+
+        .div-nova-questao{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .nova-questao{
+            background-color: black;
+            color: white;
+        }
+        
+        .nova-questao:hover {
+            background-color: grey;
+            color: black;
+        }
     </style>
 </head>
 <body>
@@ -115,7 +137,9 @@
     
     <div id="campo-questao" class="campo-questao">
         <div id="campo-interno" class="campo-interno"> 
-            <p id="texto-questao">2 + 2 = x</p><br>
+            <div class="titulo-da-questao">
+                <p id="texto-questao">2 + 2 = x</p><br>
+            </div>
 
             <div class="grid-opcoes">
                 <div class="opcao">
@@ -135,7 +159,9 @@
 
             <br>
         
-            &nbsp;<button onclick="textoDaQuestao()">Nova questão</button>
+            <div class="div-nova-questao">
+                <button class="button nova-questao" onclick="textoDaQuestao()">Nova questão</button>
+            </div>
         </div>
     </div>
 
