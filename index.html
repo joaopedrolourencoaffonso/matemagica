@@ -108,37 +108,57 @@
             background-color: grey;
             color: black;
         }
+
+        .header {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+            padding: 10px;
+        }
+
+        .header-item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     </style>
 </head>
 <body>
-
-    <select id="opcoes" onchange="selecionaTipoDeQuestao()">
-        <option value="somaSimples">Soma Simples</option>
-        <option value="subtracaoSimples">Subtração Simples</option>
-        <option value="multiplicacaoSimples">Multiplicação Simples</option>
-        <option value="divisaoSimples">Divisão Simples</option>
-        <option value="somaMultiplosDigitos">Soma com Múltiplos Dígitos</option>
-        <option value="subtracaoMultiplosDigitos">Subtração com Múltiplos Dígitos</option>
-        <option value="multiplicacaoMultiplosDigitos">Multiplicação com Múltiplos Dígitos</option>
-        <option value="divisaoComMultiplosDigitos">Divisão com Múltiplos Dígitos</option>
-        <option value="divisaoRacional">Divisão com resultado fracionado</option>
-        <option value="expressoes">Expressões</option>
-        <option value="simplificarFracao">Simplificar frações</option>
-        <option value="expressaoDeFracao">Expressões de frações</option>
-        <option value="equacoesSimples">Equações Simples</option>
-        <option value="sistemasDeEquacoes">Sistemas de Equações</option>
-        <option value="potenciacao">Potenciação</option>
-        <option value="raizQuadrada">Raiz Quadrada</option>
-        <option value="expressoesRaizPotenciacao">Expressões com raiz e potenciação</option>
-        <option value="equacaoQuadraticaSimples">Equação Quadrática Simples</option>
-    </select>
+    <div class="header">
+        <div class="header-item">
+            <select id="opcoes" onchange="selecionaTipoDeQuestao()">
+                <option value="somaSimples">Soma Simples</option>
+                <option value="subtracaoSimples">Subtração Simples</option>
+                <option value="multiplicacaoSimples">Multiplicação Simples</option>
+                <option value="divisaoSimples">Divisão Simples</option>
+                <option value="somaMultiplosDigitos">Soma com Múltiplos Dígitos</option>
+                <option value="subtracaoMultiplosDigitos">Subtração com Múltiplos Dígitos</option>
+                <option value="multiplicacaoMultiplosDigitos">Multiplicação com Múltiplos Dígitos</option>
+                <option value="divisaoComMultiplosDigitos">Divisão com Múltiplos Dígitos</option>
+                <option value="divisaoRacional">Divisão com resultado fracionado</option>
+                <option value="expressoes">Expressões</option>
+                <option value="simplificarFracao">Simplificar frações</option>
+                <option value="expressaoDeFracao">Expressões de frações</option>
+                <option value="equacoesSimples">Equações Simples</option>
+                <option value="sistemasDeEquacoes">Sistemas de Equações</option>
+                <option value="potenciacao">Potenciação</option>
+                <option value="raizQuadrada">Raiz Quadrada</option>
+                <option value="expressoesRaizPotenciacao">Expressões com raiz e potenciação</option>
+                <option value="equacaoQuadraticaSimples">Equação Quadrática Simples</option>
+            </select>
+        </div>
+    
+        <div class="header-item" id="score">
+            Score: 0/0
+        </div>
+    </div>
 
     <br><br>
     
     <div id="campo-questao" class="campo-questao">
         <div id="campo-interno" class="campo-interno"> 
             <div class="titulo-da-questao">
-                <p id="texto-questao">2 + 2 = x</p><br>
+                <p id="texto-questao">2 + 2 = x</p>
             </div>
 
             <div class="grid-opcoes">
@@ -169,6 +189,8 @@
     <script>
         let respostaDaQuestao = 4;
         let tipoDeQuestao = "somaSimples";
+        let questoesCertas = 0;
+        let totalQuestoes = 0;
 
         function textoDaQuestao() {
             var paragraph = document.getElementById("texto-questao");
@@ -742,14 +764,19 @@
                 console.log(paragrafo.textContent + " - " + respostaDaQuestao);
                 console.log(paragrafo.textContent === respostaDaQuestao);
                 if (paragrafo.textContent === respostaDaQuestao) {
+                    questoesCertas++;
                     alert("Resposta correta!");
                     textoDaQuestao();
                 } else if (Number(paragrafo.textContent) === Number(respostaDaQuestao)) {
+                    questoesCertas++;
                     alert("Resposta correta!");
                     textoDaQuestao();
                 } else {
                     alert("Resposta incorreta. Tente novamente!");
                 }
+                totalQuestoes++;
+                var score = document.getElementById('score');
+                score.textContent = `Score: ${questoesCertas} / ${totalQuestoes}`;
             } else {
                 console.log("No paragraph found with id: " + letra);
             }
