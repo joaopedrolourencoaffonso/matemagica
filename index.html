@@ -635,8 +635,10 @@
                 console.log(paragrafo.textContent === respostaDaQuestao);
                 if (paragrafo.textContent === respostaDaQuestao) {
                     alert("Resposta correta!");
+                    textoDaQuestao();
                 } else if (Number(paragrafo.textContent) === Number(respostaDaQuestao)) {
                     alert("Resposta correta!");
+                    textoDaQuestao();
                 } else {
                     alert("Resposta incorreta. Tente novamente!");
                 }
