@@ -3,6 +3,8 @@
 <head>
     <title>Matemágica</title>
 
+    <link href="https://fonts.cdnfonts.com/css/60s-scoreboard" rel="stylesheet">
+
     <style>
         .fracao {
             display: inline-flex;
@@ -121,6 +123,15 @@
             justify-content: center;
             align-items: center;
         }
+
+        .score{
+            background-color: black;
+            color: red;
+            font-size: 40px;
+            border-radius: 12px;
+            font-family: '60s Scoreboard', sans-serif;
+            width: 70%;
+        }
     </style>
 </head>
 <body>
@@ -148,7 +159,7 @@
             </select>
         </div>
     
-        <div class="header-item" id="score">
+        <div class="header-item score" id="score">
             Score: 0/0
         </div>
     </div>
@@ -184,6 +195,8 @@
             </div>
         </div>
     </div>
+
+    <!--<img src="https://github.com/joaopedrolourencoaffonso/jungle-jump/blob/main/static/runner.gif?raw=true" alt="Runner GIF" style="position: fixed; bottom: 0; right: 0; width: 100px; height: auto;">-->
 
 
     <script>
