@@ -15,6 +15,46 @@
             line-height: 1.2;
         }
 
+        .button {
+            background-color: white;
+            border: none;
+            color: black;
+            padding: 16px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .button1 {border: 2px solid #04AA6D;}
+        .button2 {border: 2px solid #008CBA;}
+        .button3 {border: 2px solid #f44336;}
+        .button4 {border: 2px solid #555555;}
+
+        .button1:hover {
+            background-color: #04AA6D;
+            color: white;
+        }
+
+        .button2:hover {
+            background-color: #008CBA;
+            color: white;
+        }
+
+        .button3:hover {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .button4:hover {
+            background-color: #555555;
+            color: white;
+        }
+
         .linha {
             width: 100%;
             border-top: 2px solid black;
@@ -23,6 +63,28 @@
 
         .base {
             line-height: 1.2;
+        }
+
+        .campo-questao {
+            display: flex;
+            justify-content: center;
+        }
+        .campo-interno {
+            border: 1px solid black;
+            width: 50%;
+        }
+
+        .grid-opcoes {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+            padding: 10px;
+        }
+
+        .opcao {
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
     </style>
 </head>
@@ -49,14 +111,34 @@
         <option value="equacaoQuadraticaSimples">Equação Quadrática Simples</option>
     </select>
 
-    <p id="texto-questao">2 + 2 = x</p>
+    <br><br>
+    
+    <div id="campo-questao" class="campo-questao">
+        <div id="campo-interno" class="campo-interno"> 
+            <p id="texto-questao">2 + 2 = x</p><br>
 
-    <button onclick="checaQuestao('a')"><p id="a">1</p></button><br>
-    <button onclick="checaQuestao('b')"><p id="b">2</p></button><br>
-    <button onclick="checaQuestao('c')"><p id="c">3</p></button><br>
-    <button onclick="checaQuestao('d')"><p id="d">4</p></button><br>
+            <div class="grid-opcoes">
+                <div class="opcao">
+                    <button class="button button1" onclick="checaQuestao('a')"><p id="a">1</p></button><br>
+                </div>
+                
+                <div class="opcao">
+                    <button class="button button2" onclick="checaQuestao('b')"><p id="b">2</p></button><br>
+                </div>
+                <div class="opcao">
+                    <button class="button button3" onclick="checaQuestao('c')"><p id="c">3</p></button><br>
+                </div>
+                <div class="opcao">
+                    <button class="button button4" onclick="checaQuestao('d')"><p id="d">4</p></button><br>
+                </div>
+            </div>
 
-    <button onclick="textoDaQuestao()">Nova questão</button>
+            <br>
+        
+            &nbsp;<button onclick="textoDaQuestao()">Nova questão</button>
+        </div>
+    </div>
+
 
     <script>
         let respostaDaQuestao = 4;
