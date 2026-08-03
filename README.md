@@ -22,15 +22,6 @@ Tipos de questões à serem implementados:
 - [X] raiz quadrada
 - [X] expressões com raiz e exponenciação
 - [X] equação quadrática Simples
-- [ ] equação quadrática Complexa
-- [ ] Razão, proporção e porcentagem
-- [ ] produtos notáveis
-- [ ] Fatoração simples
-- [ ] Identidades algébricas
-- [ ] função
-- [ ] limite
-- [ ] questão de derivada simples
-- [ ] questão de máximo e mínimo simples
 
 
 Melhorias na UI:
