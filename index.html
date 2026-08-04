@@ -44,6 +44,11 @@
             color: white;
         }
 
+        .button.wrong,
+        .button.wrong:hover {
+            background-color: red;
+        }
+
         .linha {
             width: 100%;
             border-top: 2px solid black;
@@ -121,11 +126,6 @@
             width: 70%;
         }
 
-        .button.wrong,
-        .button.wrong:hover {
-            background-color: red;
-        }
-
         .selector{
             font-family: 'Courier New', monospace;
             font-size: 20px;
@@ -200,8 +200,10 @@
     <script>
         let respostaDaQuestao = 4;
         let tipoDeQuestao = "somaSimples";
+        let tipoDeQuestaoAnterior = "somaSimples";
         let questoesCertas = 0;
         let totalQuestoes = 0;
+        atualizaQuestao();
 
         function textoDaQuestao() {
             var paragraph = document.getElementById("texto-questao");
@@ -258,6 +260,15 @@
             opcaoD.classList.remove("wrong");
 
             paragraph.innerHTML = questao;
+        }
+
+        function atualizaQuestao() {
+            setInterval(() => {
+                if (tipoDeQuestaoAnterior != tipoDeQuestao) {
+                    textoDaQuestao();
+                }
+                tipoDeQuestaoAnterior = tipoDeQuestao;
+            }, 1000);
         }
 
         function textoDasRespostas(vetorResposta) {
