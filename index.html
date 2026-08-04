@@ -133,7 +133,7 @@
 
         .score{
             background-color: black;
-            color: red;
+            color: green;
             font-size: 40px;
             border-radius: 12px;
             font-family: '60s Scoreboard', sans-serif;
@@ -796,6 +796,11 @@
                 }
                 totalQuestoes++;
                 var score = document.getElementById('score');
+                if (questoesCertas >= 0.5 * totalQuestoes) {
+                    score.style.color = "green";
+                } else {
+                    score.style.color = "red";
+                }
                 score.textContent = `Score: ${questoesCertas} / ${totalQuestoes}`;
             } else {
                 console.log("No paragraph found with id: " + letra);
