@@ -185,6 +185,8 @@
                     <button class="button" id="button-d" onclick="checaQuestao('d')"><p id="d">4</p></button><br>
                 </div>
             </div>
+            
+            <p>&nbsp;Nota: arredonde os valores para 2 casas decimais</p>
 
             <br>
         
@@ -497,7 +499,7 @@
         }
 
         function sistemasDeEquacoes() {
-            questao = "Encontre o valor de x em:<br>a1x + b1y = c1<br>a2x + b2y = c2";           
+            questao = "Encontre o valor de x em:<br>a1x + b1y = c1<br>a2x + b2y = c2";
             let a1 = getRandomInt(1,10);
             let b1 = getRandomInt(1,10);
             let c1 = getRandomInt(1,10);
@@ -505,19 +507,21 @@
             let b2 = getRandomInt(1,10);
             let c2 = getRandomInt(1,10);
 
-            let y = (b2 * c1 - b1 * c2) / (a1 * b2 - a2 * b1);
+            let y = (a1 * c2 - a2 * c1) / (a1 * b2 - a2 * b1);
             y = y.toFixed(2);
             let x = (c1 - b1 * y) / a1;
             x = x.toFixed(2);
 
             respostaDaQuestao = x;
 
+            console.log("Valores das variáveis:", a1, b1, c1, a2, b2, c2, x, y);
+
             questao = questao.replaceAll("a1", a1).replaceAll("b1", b1).replaceAll("c1", c1).replaceAll("a2", a2).replaceAll("b2", b2).replaceAll("c2", c2);
 
             let vetorResposta = fazVetorResposta(respostaDaQuestao);
             textoDasRespostas(vetorResposta);
 
-             console.log("Resposta da questão:", x, y);
+            console.log("Resposta da questão:", x, y);
 
             return questao;
         }
