@@ -125,12 +125,17 @@
         .button.wrong:hover {
             background-color: red;
         }
+
+        .selector{
+            font-family: 'Courier New', monospace;
+            font-size: 20px;
+        }
     </style>
 </head>
 <body>
     <div class="header">
         <div class="header-item">
-            <select id="opcoes" onchange="selecionaTipoDeQuestao()">
+            <select id="opcoes" onchange="selecionaTipoDeQuestao()" class="selector">
                 <option value="somaSimples">Soma Simples</option>
                 <option value="subtracaoSimples">Subtração Simples</option>
                 <option value="multiplicacaoSimples">Multiplicação Simples</option>
