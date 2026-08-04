@@ -106,29 +106,50 @@
 
         .header {
             display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
+            grid-template-columns: repeat(4, minmax(0, 1fr));
             gap: 10px;
             padding: 10px;
+            align-items: center;
+            justify-items: center;
         }
 
         .header-item {
             display: flex;
             justify-content: center;
             align-items: center;
+            width: 100%;
         }
 
-        .score{
+        .score {
             background-color: black;
             color: green;
-            font-size: 40px;
+            font-size: 30px;
             border-radius: 12px;
             font-family: '60s Scoreboard', sans-serif;
-            width: 70%;
+            width: 90%;
+            max-width: 320px;
         }
 
-        .selector{
+        .selector {
             font-family: 'Courier New', monospace;
             font-size: 20px;
+            width: 90%;
+            max-width: 320px;
+            background-color: black;
+            color: green;
+            font-family: '60s Scoreboard', sans-serif;
+            border-radius: 12px;
+        }
+
+        .timer {
+            font-family: 'Courier New', monospace;
+            font-size: 30px;
+            width: 90%;
+            max-width: 320px;
+            background-color: black;
+            color: green;
+            font-family: '60s Scoreboard', sans-serif;
+            border-radius: 12px;
         }
     </style>
 </head>
@@ -158,7 +179,15 @@
         </div>
     
         <div class="header-item score" id="score">
-            Score: 0/0
+            C/E: 0/0
+        </div>
+        
+        <div class="header-item timer" id="timer">
+            timer: 60 s
+        </div>
+
+        <div class="header-item score" id="temp">
+            Score: 0
         </div>
     </div>
 
@@ -820,7 +849,7 @@
                 } else {
                     score.style.color = "red";
                 }
-                score.textContent = `Score: ${questoesCertas} / ${totalQuestoes}`;
+                score.textContent = `C/E: ${questoesCertas} / ${totalQuestoes}`;
             } else {
                 console.log("No paragraph found with id: " + letra);
             }
