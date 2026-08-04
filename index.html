@@ -36,30 +36,11 @@
             transition-duration: 0.4s;
             cursor: pointer;
             width: 100%;
+            border: 2px solid #081c15;
         }
 
-        .button1 {border: 2px solid #04AA6D;}
-        .button2 {border: 2px solid #008CBA;}
-        .button3 {border: 2px solid #f44336;}
-        .button4 {border: 2px solid #555555;}
-
-        .button1:hover {
-            background-color: #04AA6D;
-            color: white;
-        }
-
-        .button2:hover {
-            background-color: #008CBA;
-            color: white;
-        }
-
-        .button3:hover {
-            background-color: #f44336;
-            color: white;
-        }
-
-        .button4:hover {
-            background-color: #555555;
+        .button:hover {
+            background-color: #00b4d8;
             color: white;
         }
 
@@ -80,7 +61,7 @@
         .campo-interno {
             border: 1px solid black;
             width: 50%;
-            background-color:#F5F5DC;
+            background-color:#caf0f8;
         }
 
         .grid-opcoes {
@@ -109,12 +90,12 @@
         }
         
         .nova-questao{
-            background-color: black;
+            background-color: #03045e;
             color: white;
         }
         
         .nova-questao:hover {
-            background-color: grey;
+            background-color: #48cae4;
             color: black;
         }
 
@@ -138,6 +119,11 @@
             border-radius: 12px;
             font-family: '60s Scoreboard', sans-serif;
             width: 70%;
+        }
+
+        .button.wrong,
+        .button.wrong:hover {
+            background-color: red;
         }
     </style>
 </head>
@@ -181,17 +167,17 @@
 
             <div class="grid-opcoes">
                 <div class="opcao">
-                    <button class="button button1" onclick="checaQuestao('a')"><p id="a">1</p></button><br>
+                    <button class="button" id="button-a" onclick="checaQuestao('a')"><p id="a">1</p></button><br>
                 </div>
                 
                 <div class="opcao">
-                    <button class="button button2" onclick="checaQuestao('b')"><p id="b">2</p></button><br>
+                    <button class="button" id="button-b" onclick="checaQuestao('b')"><p id="b">2</p></button><br>
                 </div>
                 <div class="opcao">
-                    <button class="button button3" onclick="checaQuestao('c')"><p id="c">3</p></button><br>
+                    <button class="button" id="button-c" onclick="checaQuestao('c')"><p id="c">3</p></button><br>
                 </div>
                 <div class="opcao">
-                    <button class="button button4" onclick="checaQuestao('d')"><p id="d">4</p></button><br>
+                    <button class="button" id="button-d" onclick="checaQuestao('d')"><p id="d">4</p></button><br>
                 </div>
             </div>
 
@@ -255,7 +241,17 @@
             } else if (tipoDeQuestao === "outro") {
                 console.log(tipoDeQuestao)
             }
-            
+
+            var opcaoA = document.getElementById("button-a");
+            var opcaoB = document.getElementById("button-b");
+            var opcaoC = document.getElementById("button-c");
+            var opcaoD = document.getElementById("button-d");
+
+            opcaoA.classList.remove("wrong");
+            opcaoB.classList.remove("wrong");
+            opcaoC.classList.remove("wrong");
+            opcaoD.classList.remove("wrong");
+
             paragraph.innerHTML = questao;
         }
 
@@ -793,6 +789,9 @@
                     textoDaQuestao();
                 } else {
                     alert("Resposta incorreta. Tente novamente!");
+                    console.log("letra: " + letra);
+                    var buttonErrado = document.getElementById("button-" + letra);
+                    buttonErrado.classList.add("wrong");
                 }
                 totalQuestoes++;
                 var score = document.getElementById('score');
