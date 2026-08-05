@@ -183,10 +183,10 @@
         </div>
         
         <div class="header-item timer" id="timer">
-            timer: 60 s
+            timer: 60
         </div>
 
-        <div class="header-item score" id="temp">
+        <div class="header-item score" id="pontos">
             Score: 0
         </div>
     </div>
@@ -234,7 +234,10 @@
         let tipoDeQuestaoAnterior = "somaSimples";
         let questoesCertas = 0;
         let totalQuestoes = 0;
+        let pontos = 0;
+        let tempoRestante = 60;
         atualizaQuestao();
+        timer();
 
         function textoDaQuestao() {
             var paragraph = document.getElementById("texto-questao");
@@ -291,12 +294,15 @@
             opcaoD.classList.remove("wrong");
 
             paragraph.innerHTML = questao;
+
+            tempoRestante = 60;
         }
 
         function atualizaQuestao() {
             setInterval(() => {
                 if (tipoDeQuestaoAnterior != tipoDeQuestao) {
                     textoDaQuestao();
+                    tempoRestante = 60;
                 }
                 tipoDeQuestaoAnterior = tipoDeQuestao;
             }, 1000);
@@ -844,6 +850,9 @@
                 }
                 totalQuestoes++;
                 var score = document.getElementById('score');
+                var pontosElement = document.getElementById('pontos');
+                calculaPontos();
+                pontosElement.textContent = `Pontos: ${pontos}`;
                 if (questoesCertas >= 0.5 * totalQuestoes) {
                     score.style.color = "green";
                 } else {
@@ -878,6 +887,32 @@
                 }
             }
             return [numerador, denominador];
+        }
+
+        function timer() {
+            setInterval(() => {
+                if (tempoRestante > 0) {
+                    tempoRestante--;
+                    var timerElement = document.getElementById('timer');
+                    timerElement.textContent = `timer: ${tempoRestante}`;
+                }
+            }, 1000);
+        }
+
+        function calculaPontos() {
+            if (tempoRestante > 50) {
+                pontos += 6;
+            } else if (tempoRestante > 40) {
+                pontos += 5;
+            } else if (tempoRestante > 30) {
+                pontos += 4;
+            } else if (tempoRestante > 20) {
+                pontos += 3;
+            } else if (tempoRestante > 10) {
+                pontos += 2;
+            } else {
+                pontos += 1;
+            }
         }
     </script>
 
