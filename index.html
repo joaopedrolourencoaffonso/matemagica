@@ -236,6 +236,7 @@
         let totalQuestoes = 0;
         let pontos = 0;
         let tempoRestante = 60;
+        let certasEmSequencia = 0;
         atualizaQuestao();
         timer();
 
@@ -834,21 +835,23 @@
             if (paragrafo) {
                 console.log(paragrafo.textContent + " - " + respostaDaQuestao);
                 console.log(paragrafo.textContent === respostaDaQuestao);
-                if (paragrafo.textContent === respostaDaQuestao) {
+                if (paragrafo.textContent === respostaDaQuestao || Number(paragrafo.textContent) === Number(respostaDaQuestao)) {
                     questoesCertas++;
                     alert("Resposta correta!");
                     calculaPontos();
-                    textoDaQuestao();
-                } else if (Number(paragrafo.textContent) === Number(respostaDaQuestao)) {
-                    questoesCertas++;
-                    alert("Resposta correta!");
-                    calculaPontos();
+                    certasEmSequencia++;
+                    if (certasEmSequencia == 10) {
+                        alert("Você acertou 10 questões seguidas! Hora de passar para a próxima fase!");
+                        proximaFase();
+                        certasEmSequencia = 0;
+                    }
                     textoDaQuestao();
                 } else {
                     alert("Resposta incorreta. Tente novamente!");
                     console.log("letra: " + letra);
                     var buttonErrado = document.getElementById("button-" + letra);
                     buttonErrado.classList.add("wrong");
+                    certasEmSequencia = 0;
                 }
                 totalQuestoes++;
                 var score = document.getElementById('score');
@@ -866,6 +869,45 @@
         }
 
         //////
+        function proximaFase() {
+            if (tipoDeQuestao == "somaSimples") {
+                tipoDeQuestao = "subtracaoSimples";
+            } else if (tipoDeQuestao == "subtracaoSimples") {
+                tipoDeQuestao = "multiplicacaoSimples";
+            } else if (tipoDeQuestao == "multiplicacaoSimples") {
+                tipoDeQuestao = "divisaoSimples";
+            } else if (tipoDeQuestao == "divisaoSimples") {
+                tipoDeQuestao = "somaMultiplosDigitos";
+            } else if (tipoDeQuestao == "somaMultiplosDigitos") {
+                tipoDeQuestao = "subtracaoMultiplosDigitos";
+            } else if (tipoDeQuestao == "subtracaoMultiplosDigitos") {
+                tipoDeQuestao = "multiplicacaoMultiplosDigitos";
+            } else if (tipoDeQuestao == "multiplicacaoMultiplosDigitos") {
+                tipoDeQuestao = "divisaoComMultiplosDigitos";
+            } else if (tipoDeQuestao == "divisaoComMultiplosDigitos") {
+                tipoDeQuestao = "divisaoRacional";
+            } else if (tipoDeQuestao == "divisaoRacional") {
+                tipoDeQuestao = "expressoes";
+            } else if (tipoDeQuestao == "expressoes") {
+                tipoDeQuestao = "simplificarFracao";
+            } else if (tipoDeQuestao == "simplificarFracao") {
+                tipoDeQuestao = "expressaoDeFracao";
+            } else if (tipoDeQuestao == "expressaoDeFracao") {
+                tipoDeQuestao = "equacoesSimples";
+            } else if (tipoDeQuestao == "equacoesSimples") {
+                tipoDeQuestao = "sistemasDeEquacoes";
+            } else if (tipoDeQuestao == "sistemasDeEquacoes") {
+                tipoDeQuestao = "potenciacao";
+            } else if (tipoDeQuestao == "potenciacao") {
+                tipoDeQuestao = "raizQuadrada";
+            } else if (tipoDeQuestao == "raizQuadrada") {
+                tipoDeQuestao = "expressoesRaizPotenciacao";
+            } else {
+                tipoDeQuestao = "somaSimples";
+                alert("Parabéns! Você completou todas as fases! E se tornou o mestre da matemágica!");
+            }
+        }
+
         function selecionaTipoDeQuestao() {
             var select = document.getElementById("opcoes");
             tipoDeQuestao = select.value;
