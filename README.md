@@ -2,7 +2,7 @@
 
 Um jogo de resolver questões matemáticas para ajudar a praticar.
 
-Tipos de questões à serem implementados:
+Tipos de questões implementados:
 
 - [X] soma simples
 - [X] subtração simples
@@ -24,10 +24,12 @@ Tipos de questões à serem implementados:
 - [X] equação quadrática Simples
 
 
-Melhorias na UI:
+Como jogar:
 
-- [X] selecionar tipo de questão
-- [ ] centralizar opções
-- [ ] embelezar butões e elementos
-- [ ] adicionar contador de questões corretas
-- [ ] adicionar animação que reage às respostas do usuário
+- acesse a [página do jogo](https://joaopedrolourencoaffonso.github.io/matemagica/).
+- clique na alternativa correta
+- a cada dez alternativas, você passa de nível para questões mais difíceis
+- Quanto mais rápido resolver as questões, mais pontos ganha
+- O campo "C/E" é a razão entre o número de questões certas e o número total de questões respondidas
+- O campo "timer" indica quanto tempo ainda resta para resolver questão. Se resolver faltando 50 segundos, ganha 6 pontos. Se resolver faltando 40 segundos, ganha 5 pontos e assim por diante. Se zera o tempo, ganha apenas um ponto.
+- Caso não queira resolver as questões sem avançar de fase, basta marcar a caixa "*Passar fase automaticamente?*"

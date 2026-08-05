@@ -876,19 +876,15 @@
                 console.log(paragrafo.textContent === respostaDaQuestao);
                 if (paragrafo.textContent === respostaDaQuestao || Number(paragrafo.textContent) === Number(respostaDaQuestao)) {
                     questoesCertas++;
-                    //alert("Resposta correta!");
                     calculaPontos();
                     certasEmSequencia++;
                     if (certasEmSequencia >= 10 && passarFase) {
-                        //alert("Você acertou 10 questões seguidas! Hora de passar para a próxima fase!");
                         showElement();
                         proximaFase();
                         certasEmSequencia = 0;
                     }
                     textoDaQuestao();
                 } else {
-                    //alert("Resposta incorreta. Tente novamente!");
-                    console.log("letra: " + letra);
                     var buttonErrado = document.getElementById("button-" + letra);
                     buttonErrado.classList.add("wrong");
                     certasEmSequencia = 0;
@@ -910,7 +906,7 @@
 
         //////
         function proximaFase() {
-            //tipoDeQuestao = "teste";
+            
             if (tipoDeQuestao == "somaSimples") {
                 tipoDeQuestao = "subtracaoSimples";
             } else if (tipoDeQuestao == "subtracaoSimples") {
@@ -944,8 +940,6 @@
             } else if (tipoDeQuestao == "raizQuadrada") {
                 tipoDeQuestao = "expressoesRaizPotenciacao";
             } else {
-                //tipoDeQuestao = "somaSimples";
-                //alert("Parabéns! Você completou todas as fases! E se tornou o mestre da matemágica!");
                 endGame = true;
                 var elementComemoracao = document.getElementById("comemoracao");
                 elementComemoracao.style.backgroundColor = "gold";
