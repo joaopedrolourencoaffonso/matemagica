@@ -216,6 +216,8 @@
             </div>
             
             <p>&nbsp;Nota: arredonde os valores para 2 casas decimais</p>
+            <input type="checkbox" id="passaFaseBox" name="passaFaseBox" checked>
+            <label for="passaFaseBox">Passar fase automaticamente?</label>
 
             <br>
         
@@ -237,6 +239,7 @@
         let pontos = 0;
         let tempoRestante = 60;
         let certasEmSequencia = 0;
+        let passarFase = true;
         atualizaQuestao();
         timer();
 
@@ -840,7 +843,7 @@
                     alert("Resposta correta!");
                     calculaPontos();
                     certasEmSequencia++;
-                    if (certasEmSequencia == 10) {
+                    if (certasEmSequencia >= 10 && passarFase) {
                         alert("Você acertou 10 questões seguidas! Hora de passar para a próxima fase!");
                         proximaFase();
                         certasEmSequencia = 0;
@@ -939,6 +942,13 @@
                     var timerElement = document.getElementById('timer');
                     timerElement.textContent = `timer: ${tempoRestante}`;
                 }
+                passaFaseBox = document.getElementById('passaFaseBox');
+                if (passaFaseBox.checked) {
+                    passarFase = true;
+                } else {
+                    passarFase = false;
+                }
+                console.log(passarFase);
             }, 1000);
         }
 
