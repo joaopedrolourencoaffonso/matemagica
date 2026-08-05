@@ -151,6 +151,33 @@
             font-family: '60s Scoreboard', sans-serif;
             border-radius: 12px;
         }
+
+        .box {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.95);
+            text-align: center;
+            background-color: lightcoral;
+            padding: 20px 24px;
+            color: white;
+            visibility: hidden;
+            opacity: 0;
+            z-index: 1000;
+            pointer-events: none;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            border-radius: 16px;
+            max-width: min(90vw, 480px);
+            width: 90%;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .box img {
+            max-width: 220px;
+            max-height: 220px;
+            object-fit: cover;
+            border-radius: 12px;
+        }
     </style>
 </head>
 <body>
@@ -227,10 +254,10 @@
         </div>
     </div>
 
-    <div class="box" id="box">
-        Parabéns, você acertou 10 questões direto!
+    <div class="box" id="comemoracao">
+        <p id="mensagem">10 DIRETO! PRÓXIMA FASE!</p>
         <br>
-        <img src="https://upload.wikimedia.org/wikipedia/en/5/5c/Mario_by_Shigehisa_Nakaue.png">
+        <img id="imagem-mensagem" src="https://upload.wikimedia.org/wikipedia/en/5/5c/Mario_by_Shigehisa_Nakaue.png">
         <!--Essa figura foi tirada da wikimedia commons, nem vem que não tem, Nintendo-->
     </div>
 
@@ -247,6 +274,8 @@
         let tempoRestante = 60;
         let certasEmSequencia = 0;
         let passarFase = true;
+        let celebracaoTimeoutId = null;
+        let endGame = false;
         atualizaQuestao();
         timer();
 
@@ -847,17 +876,18 @@
                 console.log(paragrafo.textContent === respostaDaQuestao);
                 if (paragrafo.textContent === respostaDaQuestao || Number(paragrafo.textContent) === Number(respostaDaQuestao)) {
                     questoesCertas++;
-                    alert("Resposta correta!");
+                    //alert("Resposta correta!");
                     calculaPontos();
                     certasEmSequencia++;
                     if (certasEmSequencia >= 10 && passarFase) {
-                        alert("Você acertou 10 questões seguidas! Hora de passar para a próxima fase!");
+                        //alert("Você acertou 10 questões seguidas! Hora de passar para a próxima fase!");
+                        showElement();
                         proximaFase();
                         certasEmSequencia = 0;
                     }
                     textoDaQuestao();
                 } else {
-                    alert("Resposta incorreta. Tente novamente!");
+                    //alert("Resposta incorreta. Tente novamente!");
                     console.log("letra: " + letra);
                     var buttonErrado = document.getElementById("button-" + letra);
                     buttonErrado.classList.add("wrong");
@@ -880,6 +910,7 @@
 
         //////
         function proximaFase() {
+            //tipoDeQuestao = "teste";
             if (tipoDeQuestao == "somaSimples") {
                 tipoDeQuestao = "subtracaoSimples";
             } else if (tipoDeQuestao == "subtracaoSimples") {
@@ -913,8 +944,16 @@
             } else if (tipoDeQuestao == "raizQuadrada") {
                 tipoDeQuestao = "expressoesRaizPotenciacao";
             } else {
-                tipoDeQuestao = "somaSimples";
-                alert("Parabéns! Você completou todas as fases! E se tornou o mestre da matemágica!");
+                //tipoDeQuestao = "somaSimples";
+                //alert("Parabéns! Você completou todas as fases! E se tornou o mestre da matemágica!");
+                endGame = true;
+                var elementComemoracao = document.getElementById("comemoracao");
+                elementComemoracao.style.backgroundColor = "gold";
+                var mensagem = document.getElementById("mensagem");
+                mensagem.textContent = "Parabéns! Você completou todas as fases! E se tornou o mestre da matemágica!";
+                var imagemMensagem = document.getElementById("imagem-mensagem");
+                imagemMensagem.src = "https://images.unsplash.com/photo-1551103782-8ab07afd45c1?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+                showElement();
             }
         }
 
@@ -973,6 +1012,35 @@
             } else {
                 pontos += 1;
             }
+        }
+
+        function showElement() {
+            var element = document.getElementById("comemoracao");
+            if (!element) return;
+
+            if (celebracaoTimeoutId) {
+                clearTimeout(celebracaoTimeoutId);
+            }
+
+            element.style.top = "50%";
+            element.style.left = "50%";
+            element.style.transform = "translate(-50%, -50%) scale(1)";
+            element.style.visibility = "visible";
+            element.style.opacity = "1";
+
+            if (!endGame) {
+                celebracaoTimeoutId = setTimeout(hideElement, 2200);
+            }
+        }
+        
+        // Function to hide the element by moving it back down
+        function hideElement() {
+            var element = document.getElementById("comemoracao");
+            if (!element) return;
+
+            element.style.transform = "translate(-50%, -50%) scale(0.95)";
+            element.style.visibility = "hidden";
+            element.style.opacity = "0";
         }
     </script>
 
