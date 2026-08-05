@@ -837,10 +837,12 @@
                 if (paragrafo.textContent === respostaDaQuestao) {
                     questoesCertas++;
                     alert("Resposta correta!");
+                    calculaPontos();
                     textoDaQuestao();
                 } else if (Number(paragrafo.textContent) === Number(respostaDaQuestao)) {
                     questoesCertas++;
                     alert("Resposta correta!");
+                    calculaPontos();
                     textoDaQuestao();
                 } else {
                     alert("Resposta incorreta. Tente novamente!");
@@ -851,7 +853,6 @@
                 totalQuestoes++;
                 var score = document.getElementById('score');
                 var pontosElement = document.getElementById('pontos');
-                calculaPontos();
                 pontosElement.textContent = `Pontos: ${pontos}`;
                 if (questoesCertas >= 0.5 * totalQuestoes) {
                     score.style.color = "green";
